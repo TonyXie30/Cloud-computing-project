@@ -17,7 +17,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(new AntPathRequestMatcher("/api/login"), new AntPathRequestMatcher("/api/register")).permitAll() // Allow access to /api/login and /api/register
+                        .requestMatchers(new AntPathRequestMatcher("/api/verify/login"), new AntPathRequestMatcher("/api/verify/register")).permitAll() // Allow access to /api/login and /api/register
                         .anyRequest().authenticated() // Any other request needs authentication
                 );
         return http.build();

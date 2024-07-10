@@ -6,7 +6,9 @@ import com.whitepoor.profile.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.whitepoor.profile.service.UserService;
+
 @RestController
+@CrossOrigin
 public class UserController {
 
     @Autowired

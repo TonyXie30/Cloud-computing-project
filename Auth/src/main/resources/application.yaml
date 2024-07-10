@@ -16,22 +16,27 @@ spring:
           predicates:
             - Path=/api/main/**
           filters:
-            - name: JwtAuthGatewayFilter
+            - name: JwtAuth
         - id: profile_service
           uri: http://localhost:8445
           predicates:
-            - Path=/profile/**
+            - Path=/api/profile/**
           filters:
-            - name: JwtAuthGatewayFilter
+            - name: JwtAuth
         - id: verify_service
           uri: http://localhost:8446
           predicates:
             - Path=/api/verify/**
   application:
     name: Auth
+  main:
+    web-application-type: reactive
 
 server:
   port: 8443
 jwt:
   secret: p4M/KQlpQ1gP1HcBfLl9t0Sjx5Ff/oeWrtfsdhWld8qS4gn97A0Hg3bYpUNSsdHQD0qH2rDP7AEfPQ2KpGxyXA==
   expiration: 604800
+logging:
+  level:
+    root: DEBUG

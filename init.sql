@@ -78,7 +78,7 @@ values
     (2147483647,'工学院旁')
 ON conflict(name)
     DO NOTHING;
-COMMIT;
+
 
 
 INSERT INTO event (id,description,start_time, end_time, limits, name, picture, place_id)
@@ -183,4 +183,4 @@ values
      1)
 ON conflict(id)
     DO NOTHING;
-COMMIT;
+
