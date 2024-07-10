@@ -3,6 +3,7 @@ FROM maven:3.6.3-openjdk-17 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
+RUN rm -f ./src/main/resources/application.yaml
 RUN mvn clean package spring-boot:repackage -DskipTests
 
 # Use OpenJDK to run the application
