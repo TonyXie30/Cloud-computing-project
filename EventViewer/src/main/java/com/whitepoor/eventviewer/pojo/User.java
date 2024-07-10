@@ -21,8 +21,6 @@ public class User {
     long id;
     @Column(unique = true)
     String username;
-    @Column
-    String password;
 
     /**
      * 如果用具体类ArrayList接收会报错，但用List接口不会。
