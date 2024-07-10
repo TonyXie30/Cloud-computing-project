@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.whitepoor</groupId>
-	<artifactId>Login</artifactId>
+	<artifactId>Verify</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Login</name>
 	<description>Login</description>

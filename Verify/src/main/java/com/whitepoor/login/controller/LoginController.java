@@ -33,7 +33,7 @@ public class LoginController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/verify/login")
     @Transactional
     @CrossOrigin
     @ResponseBody
@@ -65,7 +65,7 @@ public class LoginController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/api/register")
+    @PostMapping("/api/verify/register")
     @Transactional
     @CrossOrigin
     @ResponseBody

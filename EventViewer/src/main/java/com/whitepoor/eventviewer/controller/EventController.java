@@ -16,7 +16,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @PostMapping("/api/showAllEvents")
+    @PostMapping("/api/main/showAllEvents")
     @ResponseBody
     @CrossOrigin
     public Page<Event> showAllEvents(@RequestParam(required = false) Integer page,
@@ -34,7 +34,7 @@ public class EventController {
         return eventService.findAllEvents(info,attr);
     }
 
-    @PostMapping("/api/getRecommendEvents")
+    @PostMapping("/api/main/getRecommendEvents")
     @ResponseBody
     @CrossOrigin
     public List<Event> getRecommendEvents(@RequestParam(required = false, defaultValue = "1")

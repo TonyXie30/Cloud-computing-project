@@ -23,7 +23,7 @@ public class UserController {
     private EventService eventService;
 
 
-    @PostMapping("/api/joinEvent")
+    @PostMapping("/api/main/joinEvent")
     @ResponseBody
     public void joinEvent(String username, long eventId) {
         /*
@@ -36,7 +36,7 @@ public class UserController {
         userService.joinEvent(user, eventId);
     }
 
-    @PostMapping("/api/leaveEvent")
+    @PostMapping("/api/main/leaveEvent")
     @ResponseBody
     public void leaveEvent(String username, long eventId) {
         /*
@@ -49,7 +49,7 @@ public class UserController {
         userService.leaveEvent(user, eventId);
     }
 
-    @PostMapping("/api/getSelfEvents")
+    @PostMapping("/api/main/getSelfEvents")
     @ResponseBody
     public List<Event> getSelfEvents(
             @RequestParam String username,
