@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-config
+  namespace: microservices
+data:
+  application.yaml: |
+    spring:
+      data:
+        redis:
+          host: redis-service
+          port: 6379
+          database: 0
+      cloud:
+        gateway:
+          routes:
+            - id: main_service
+              uri: http://main-service:8444
+              predicates:
+                - Path=/api/main/**
+              filters:
+                - name: JwtAuth
+            - id: profile_service
+              uri: http://profile-service:8445
+              predicates:
+                - Path=/api/profile/**
+              filters:
+                - name: JwtAuth
+            - id: verify_service
+              uri: http://verify-service:8446
+              predicates:
+                - Path=/api/verify/**
+      application:
+        name: Auth
+      main:
+        web-application-type: reactive
+    server:
+      port: 8443
+    jwt:
+      secret: ${JWT_SECRET}
+      expiration: 604800000
