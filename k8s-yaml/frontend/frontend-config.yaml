@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: frontend-config
 data:
-  VUE_APP_API_URL: #Service name
+  VUE_APP_API_URL: auth-service
