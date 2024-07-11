@@ -10,5 +10,5 @@ RUN mvn clean package spring-boot:repackage -DskipTests
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-EXPOSE 8446, 8080
+EXPOSE 8446 8080
 CMD ["java", "-jar", "app.jar"]
