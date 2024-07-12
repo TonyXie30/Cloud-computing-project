@@ -19,4 +19,3 @@ data:
     spring.data.redis.host=redis-service
     spring.data.redis.port=6379
     spring.data.redis.database=0
-
