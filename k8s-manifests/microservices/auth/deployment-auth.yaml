@@ -20,7 +20,6 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /config
-          subPath: application.yaml
         env:
         - name: SPRING_CONFIG_LOCATION
           value: "/config/application.yaml"
@@ -29,10 +28,20 @@ spec:
             secretKeyRef:
               name: jwt-secret
               key: JWT_SECRET
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
       volumes:
       - name: config-volume
         configMap:
           name: auth-config
+          items:
+              - key: application.yaml
+                path: application.yaml
 ---
 apiVersion: v1
 kind: Service
