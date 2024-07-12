@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: Deployment
 metadata:
-  name: verify-deployment
+  name: main-deployment
   namespace: microservices
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: verify
+      app: main
   template:
     metadata:
       labels:
-        app: verify
+        app: main
     spec:
       containers:
-      - name: verify
-        image: tonyxie2017/unity-verify:latest
+      - name: main
+        image: tonyxie2017/unity-main:latest
         ports:
-        - containerPort: 8446
+        - containerPort: 8444
         volumeMounts:
         - name: config-volume
           mountPath: /config
@@ -35,25 +35,20 @@ spec:
             secretKeyRef:
               name: pgsql-secret
               key: password
-        - name: JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: jwt-secret
-              key: jwt-key
       volumes:
       - name: config-volume
         configMap:
-          name: verify-config
+          name: main-config
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: verify-service
+  name: main-service
   namespace: microservices
 spec:
   selector:
-    app: verify
+    app: main
   ports:
     - protocol: TCP
-      port: 8446
-      targetPort: 8446
+      port: 8444
+      targetPort: 8444
