@@ -28,7 +28,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: jwt-secret
-              key: jwt-key
+              key: JWT_SECRET
       volumes:
       - name: config-volume
         configMap:
