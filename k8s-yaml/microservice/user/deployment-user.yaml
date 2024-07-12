@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: user-deployment
+  namespace: microservices
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: user
+        image: tonyxie2017/unity-user:latest
+        ports:
+        - containerPort: 8445
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+          subPath: application.properties
+        env:
+        - name: SPRING_CONFIG_LOCATION
+          value: "/config/application.properties"
+        - name: PGSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: pgsql-secret
+              key: username
+        - name: PGSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pgsql-secret
+              key: password
+      volumes:
+      - name: config-volume
+        configMap:
+          name: user-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: microservices
+spec:
+  selector:
+    app: user
+  ports:
+    - protocol: TCP
+      port: 8445
+      targetPort: 8445
