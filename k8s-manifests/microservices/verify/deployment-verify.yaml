@@ -1,0 +1,47 @@
+# Unfinished
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: verify-deployment
+  namespace: microservices
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: verify
+  template:
+    metadata:
+      labels:
+        app: verify
+    spec:
+      containers:
+      - name: verify
+        image: tonyxie2017/unity-verify:latest
+        ports:
+        - containerPort: 8446
+        volumeMounts:
+        - name: config-volume
+          mountPath: /config
+          subPath: application.properties
+        env:
+        - name: SPRING_CONFIG_LOCATION
+          value: "/config/application.properties"
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt-secret
+              key: JWT_SECRET
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
+      volumes:
+      - name: config-volume
+        configMap:
+          name: verify-config 
