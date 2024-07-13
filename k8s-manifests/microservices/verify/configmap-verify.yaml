@@ -10,7 +10,7 @@ data:
     spring.datasource.driver-class-name=org.postgresql.Driver
     spring.datasource.username=${POSTGRES_USER}
     spring.datasource.password=${POSTGRES_PASSWORD}
-    spring.datasource.url=jdbc:postgresql://db-verify-service:5432/cloud
+    spring.datasource.url=jdbc:postgresql://verify-db-service:5432/cloud
     spring.jpa.hibernate.ddl-auto=update
     spring.jpa.show-sql=false
     server.servlet.session.timeout=30m

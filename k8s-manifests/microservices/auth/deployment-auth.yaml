@@ -28,13 +28,6 @@ spec:
             secretKeyRef:
               name: jwt-secret
               key: JWT_SECRET
-        resources:
-          limits:
-            cpu: "1"
-            memory: "512Mi"
-          requests:
-            cpu: "0.5"
-            memory: "256Mi"
       volumes:
       - name: config-volume
         configMap:

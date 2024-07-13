@@ -42,6 +42,8 @@ spec:
             secretKeyRef:
               name: main-secret
               key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          value: cloud
         volumeMounts:
         - name: main-db-storage
           mountPath: /data

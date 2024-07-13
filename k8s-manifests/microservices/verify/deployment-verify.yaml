@@ -27,25 +27,18 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: pgsql-secret
-              key: username
+              name: verify-secret
+              key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: pgsql-secret
-              key: password
+              name: verify-secret
+              key: POSTGRES_PASSWORD
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
               name: jwt-secret
-              key: jwt-key
-        resources:
-          limits:
-            cpu: "1"
-            memory: "512Mi"
-          requests:
-            cpu: "0.5"
-            memory: "256Mi"
+              key: JWT_SECRET
       volumes:
       - name: config-volume
         configMap:

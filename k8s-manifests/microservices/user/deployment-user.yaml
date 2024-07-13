@@ -20,26 +20,19 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /config
-        resources:
-          limits:
-            cpu: "1"
-            memory: "512Mi"
-          requests:
-            cpu: "0.5"
-            memory: "256Mi"
         env:
         - name: SPRING_CONFIG_LOCATION
           value: "/config/application.properties"
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: pgsql-secret
-              key: username
+              name: user-secret
+              key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: pgsql-secret
-              key: password
+              name: user-secret
+              key: POSTGRES_PASSWORD
       volumes:
       - name: config-volume
         configMap:
