@@ -32,21 +32,19 @@ spec:
         - containerPort: 5432
           name: main-db
         env:
-        - name: POSTGRES_DB
-          value: main
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-secrets
+              name: main-secret
               key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secrets
+              name: main-secret
               key: POSTGRES_PASSWORD
         volumeMounts:
         - name: main-db-storage
-          mountPath: /var/lib/postgresql/data
+          mountPath: /data
   volumeClaimTemplates:
   - metadata:
       name: main-db-storage
@@ -55,4 +53,4 @@ spec:
       storageClassName: ebs-sc
       resources:
         requests:
-          storage: 5Gi
+          storage: 1Gi

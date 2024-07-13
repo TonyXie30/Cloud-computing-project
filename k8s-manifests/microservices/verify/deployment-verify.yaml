@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: verify-deployment
@@ -21,16 +21,15 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /config
-          subPath: application.properties
         env:
         - name: SPRING_CONFIG_LOCATION
           value: "/config/application.properties"
-        - name: PGSQL_USER
+        - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
               name: pgsql-secret
               key: username
-        - name: PGSQL_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: pgsql-secret
@@ -40,10 +39,20 @@ spec:
             secretKeyRef:
               name: jwt-secret
               key: jwt-key
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
       volumes:
       - name: config-volume
         configMap:
           name: verify-config
+          items:
+              - key: application.properties
+                path: application.properties
 ---
 apiVersion: v1
 kind: Service

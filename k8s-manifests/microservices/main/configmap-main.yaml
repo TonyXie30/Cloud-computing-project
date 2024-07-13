@@ -7,8 +7,8 @@ data:
     spring.application.name=EventViewer
     server.port=8444
     spring.datasource.driver-class-name=org.postgresql.Driver
-    spring.datasource.username=${PGSQL_USER}
-    spring.datasource.password=${PGSQL_PASSWORD}
+    spring.datasource.username=${POSTGRES_USER}
+    spring.datasource.password=${POSTGRES_PASSWORD}
     spring.datasource.url=jdbc:postgresql://main-db-service:5432/cloud
     spring.jpa.hibernate.ddl-auto=update
     spring.jpa.show-sql=false

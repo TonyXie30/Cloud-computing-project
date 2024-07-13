@@ -8,8 +8,8 @@ data:
     spring.application.name=Profile
     server.port=8445
     spring.datasource.driver-class-name=org.postgresql.Driver
-    spring.datasource.username=${PGSQL_USER}
-    spring.datasource.password=${PGSQL_PASSWORD}
+    spring.datasource.username=${POSTGRES_USER}
+    spring.datasource.password=${POSTGRES_PASSWORD}
     spring.datasource.url=jdbc:postgresql://db-user-service:5432/cloud
     spring.jpa.hibernate.ddl-auto=update
     spring.jpa.show-sql=false

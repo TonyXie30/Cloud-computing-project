@@ -20,16 +20,15 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /config
-          subPath: application.properties
         env:
         - name: SPRING_CONFIG_LOCATION
           value: "/config/application.properties"
-        - name: PGSQL_USER
+        - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
               name: pgsql-secret
               key: username
-        - name: PGSQL_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: pgsql-secret
@@ -45,6 +44,9 @@ spec:
       - name: config-volume
         configMap:
           name: main-config
+          items:
+              - key: application.properties
+                path: application.properties
 ---
 apiVersion: v1
 kind: Service
