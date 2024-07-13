@@ -31,8 +31,11 @@ public class UserController {
          * @param eventId
          */
         User user = userService.getUser(username);
-        if (user == null)
-            throw new MyException(5000,"User not found");
+        if (user == null){
+            user = new User();
+            user.setUsername(username);
+            userService.register(user);
+        }
         userService.joinEvent(user, eventId);
     }
 
@@ -44,8 +47,11 @@ public class UserController {
          * @param eventId
          */
         User user = userService.getUser(username);
-        if (user == null)
-            throw new MyException(5000,"User not found");
+        if (user == null){
+            user = new User();
+            user.setUsername(username);
+            userService.register(user);
+        }
         userService.leaveEvent(user, eventId);
     }
 
@@ -63,8 +69,11 @@ public class UserController {
             * @return List<Event>
          */
         User user = userService.getUser(username);
-        if (user == null)
-            throw new MyException(5000,"User not found");
+        if (user == null){
+            user = new User();
+            user.setUsername(username);
+            userService.register(user);
+        }
 
         if (start == null && end == null) {
             return eventService.findEventByUser(user.getId());

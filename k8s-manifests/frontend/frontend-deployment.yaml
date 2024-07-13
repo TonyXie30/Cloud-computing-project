@@ -20,6 +20,6 @@ spec:
         env:
         - name: VUE_APP_API_URL
           valueFrom:
-            configKeyRef:
+            configMapKeyRef:
               name: frontend-config
               key: VUE_APP_API_URL

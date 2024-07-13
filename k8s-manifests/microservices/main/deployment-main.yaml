@@ -22,7 +22,7 @@ spec:
           mountPath: /config
         env:
         - name: SPRING_CONFIG_LOCATION
-          value: "/config/application.properties"
+          value: "/config/application.yaml"
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
@@ -38,8 +38,8 @@ spec:
         configMap:
           name: main-config
           items:
-              - key: application.properties
-                path: application.properties
+              - key: application.yaml
+                path: application.yaml
 ---
 apiVersion: v1
 kind: Service
