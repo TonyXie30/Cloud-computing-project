@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-deployment
@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: tonyxie2017/unity-frontend
+        image: tonyxie2017/unity-frontend:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         env:
         - name: VUE_APP_API_URL
           valueFrom:
-            configKeyRef:
+            configMapKeyRef:
               name: frontend-config
               key: VUE_APP_API_URL
