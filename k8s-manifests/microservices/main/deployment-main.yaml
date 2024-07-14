@@ -23,16 +23,16 @@ spec:
         env:
         - name: SPRING_CONFIG_LOCATION
           value: "/config/application.yaml"
-        - name: DB_USER
+        - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: DB_USERNAME
-        - name: DB_PASSWORD
+              key: POSTGRES_USERNAME
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: DB_PASSWORD
+              key: POSTGRES_PASSWORD
       volumes:
       - name: config-volume
         configMap:

@@ -9,8 +9,8 @@ data:
         name: EventViewer
       datasource:
         driver-class-name: org.postgresql.Driver
-        username: ${DB_USERNAME}
-        password: ${DB_PASSWORD}
+        username: ${POSTGRES_USERNAME}
+        password: ${POSTGRES_PASSWORD}
         url: jdbc:postgresql://main-db-service:5432/cloud
       jpa:
         hibernate:
