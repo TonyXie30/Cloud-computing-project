@@ -41,7 +41,7 @@ const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
 
 const globalVariable = inject('globalVariable');
 async function handleSubmit() {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/verify/login';
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/verify/login';
   const logindata = {
     username: model.userName,
     password: model.password

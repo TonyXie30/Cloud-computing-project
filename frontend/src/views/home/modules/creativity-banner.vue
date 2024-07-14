@@ -37,7 +37,7 @@ defineOptions({
 });
 
 onMounted(()=>{
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/getRecommendEvents';
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/getRecommendEvents';
   axios
     .post(apiUrl)
     .then(response => {
@@ -67,7 +67,7 @@ function openModal(src: string) {
 }
 
 function bookEvent(id: number) {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
   axios
     .post(apiUrl)
     .then(response => {

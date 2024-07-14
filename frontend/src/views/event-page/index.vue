@@ -76,7 +76,7 @@ function searchEvents() {
 }
 
 onMounted(()=>{
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/showAllEvents';
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/showAllEvents';
   axios
     .post(apiUrl)
     .then(response => {
@@ -109,7 +109,7 @@ function openModal(src: string, des: string, id: number) {
 }
 
 function bookEvent(id: number) {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
   axios
     .post(apiUrl)
     .then(response => {

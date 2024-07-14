@@ -14,4 +14,4 @@ data:
     spring.jpa.hibernate.ddl-auto=update
     spring.jpa.show-sql=false
     server.servlet.session.timeout=30m
-
+    logging.level.web=DEBUG

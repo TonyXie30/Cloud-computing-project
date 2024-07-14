@@ -35,7 +35,7 @@ const eventsBrief = ref<EventBrief[]>([]);
 const events = ref<Event[]>([]);
 
 const fetchEvents = async () => {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/getSelfEvents?username=' + storage.get('user')?.name
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/getSelfEvents?username=' + storage.get('user')?.name
   try {
     const response = await axios.post(apiUrl)
     if (response.data.code === 200) {
@@ -63,7 +63,7 @@ onMounted(() => {
 })
 
 function bookCancel(id: number) {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/leaveEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/leaveEvent?username='+storage.get('user')?.name+'&eventId='+id;
   axios
     .post(apiUrl)
     .then(response => {

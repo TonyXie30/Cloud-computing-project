@@ -15,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @CrossOrigin
-    @PostMapping(value = "api/profile/getProfile")
+    @PostMapping(value = "/api/profile/getProfile")
     @ResponseBody
     public User profile(@RequestParam String username) {
         User user = userService.getUser(username);
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "api/profile/updateProfile")
+    @PostMapping(value = "/api/profile/updateProfile")
     @ResponseBody
     public User updateProfile(@RequestParam String username,
                               @RequestParam(required = false) String password,

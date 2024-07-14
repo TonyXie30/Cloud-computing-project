@@ -106,7 +106,7 @@ const toggleEditMode = () => {
     let gender = UserData.value.gender.gender || 'male';
     let subject = UserData.value.subject.name;
     let age = UserData.value.age || 0;
-    const apiUrl = 'process.env.VUE_APP_API_URL/api/profile/updateProfile?username='+storage.get('user')?.name +'&age='+age+'&subject='+ subject +'&gender='+gender
+    const apiUrl = 'http://process.env.VUE_APP_API_URL/api/profile/updateProfile?username='+storage.get('user')?.name +'&age='+age+'&subject='+ subject +'&gender='+gender
       +'&picture='+UserData.value.picture;
     console.log(apiUrl)
     axios
@@ -127,7 +127,7 @@ const toggleEditMode = () => {
 };
 
 onMounted(() => {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/profile/getProfile?username='+storage.get('user')?.name;
+  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/profile/getProfile?username='+storage.get('user')?.name;
   console.log(apiUrl);
   axios
     .post(apiUrl)

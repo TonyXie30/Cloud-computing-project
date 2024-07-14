@@ -45,7 +45,7 @@ const handleSubmit = () => {
     value.value = '';
   }, 1000);
   console.log(props.eventId);
-  // const apiUrl = 'process.env.VUE_APP_API_URL/api/addComment?eventId='+props.eventId+'&comment='+value.value+'&username='+storage.get('user')?.name;
+  // const apiUrl = 'http://process.env.VUE_APP_API_URL/api/addComment?eventId='+props.eventId+'&comment='+value.value+'&username='+storage.get('user')?.name;
   // axios
   //   .post(apiUrl)
   //   .then(response => {
@@ -63,7 +63,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   console.log(props.eventId);
-  // const apiUrl = 'process.env.VUE_APP_API_URL/api/showComment?eventId='+props.eventId;
+  // const apiUrl = 'http://process.env.VUE_APP_API_URL/api/showComment?eventId='+props.eventId;
   // axios
   //   .post(apiUrl)
   //   .then(response => {
