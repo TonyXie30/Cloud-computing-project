@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: verify-deployment
-  
 spec:
   replicas: 3
   selector:
@@ -24,11 +23,11 @@ spec:
         env:
         - name: SPRING_CONFIG_LOCATION
           value: "/config/application.properties"
-        - name: DB_USER
+        - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: DB_USER
+              key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:

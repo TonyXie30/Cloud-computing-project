@@ -8,7 +8,7 @@ data:
     spring.application.name=Login
     server.port=8446
     spring.datasource.driver-class-name=org.postgresql.Driver
-    spring.datasource.username=${DB_USER}
+    spring.datasource.username=${DB_USERNAME}
     spring.datasource.password=${DB_PASSWORD}
     spring.datasource.url=jdbc:postgresql://verify-db-service:5432/cloud
     spring.jpa.hibernate.ddl-auto=update

@@ -32,11 +32,11 @@ spec:
         - containerPort: 5432
           name: main-db
         env:
-        - name: DB_USER
+        - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: DB_USER
+              key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
