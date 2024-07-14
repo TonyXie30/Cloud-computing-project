@@ -35,9 +35,14 @@ const eventsBrief = ref<EventBrief[]>([]);
 const events = ref<Event[]>([]);
 
 const fetchEvents = async () => {
-  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/getSelfEvents?username=' + storage.get('user')?.name
+  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/getSelfEvents?username=' + storage.get('user')?.name
+  const token = window.localStorage.getItem('jwt')
   try {
-    const response = await axios.post(apiUrl)
+    const response = await axios.post(apiUrl,{}, {
+      headers:{
+        'Authorization': `Bearer ${token}`
+      }
+    })
     if (response.data.code === 200) {
       events.value = response.data.data.map((event: any) => ({
         id: event.id,
@@ -63,9 +68,14 @@ onMounted(() => {
 })
 
 function bookCancel(id: number) {
-  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/leaveEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/leaveEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const token = window.localStorage.getItem('jwt');
   axios
-    .post(apiUrl)
+    .post(apiUrl, {}, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(response => {
       console.log(response.data);
       if(response.data.code===200){

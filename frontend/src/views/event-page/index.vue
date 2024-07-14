@@ -76,9 +76,14 @@ function searchEvents() {
 }
 
 onMounted(()=>{
-  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/showAllEvents';
+  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/showAllEvents';
+  const token = window.localStorage.getItem('jwt');
   axios
-    .post(apiUrl)
+    .post(apiUrl, {}, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(response => {
       console.log(response.data.data.content.length);
       if(response.data.code===200){
@@ -109,9 +114,14 @@ function openModal(src: string, des: string, id: number) {
 }
 
 function bookEvent(id: number) {
-  const apiUrl = 'http://process.env.VUE_APP_API_URL/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://' + 'localhost:8443'+ '/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const token = window.localStorage.getItem('jwt');
   axios
-    .post(apiUrl)
+    .post(apiUrl, {}, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(response => {
       console.log(response.data);
       if(response.data.code===200){

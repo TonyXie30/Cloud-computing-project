@@ -9,7 +9,6 @@ import { setupStore } from './store';
 import { setupRouter } from './router';
 import { setupI18n } from './locales';
 import App from './App.vue';
-import axios from './config/axios-config';
 // gg
 
 async function setupApp() {
@@ -40,7 +39,6 @@ async function setupApp() {
   app.use(ElementPlus);
   app.use(Antd);
   app.mount('#app');
-  app.config.globalProperties.$axios = axios;
 }
 
 setupApp();
