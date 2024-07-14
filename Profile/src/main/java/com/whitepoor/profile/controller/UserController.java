@@ -18,7 +18,14 @@ public class UserController {
     @PostMapping(value = "api/profile/getProfile")
     @ResponseBody
     public User profile(@RequestParam String username) {
-        return userService.getUser(username);
+        User user = userService.getUser(username);
+        // create user if not exists
+        if (user == null) {
+            user = new User();
+            user.setUsername(username);
+            userService.register(user);
+        }
+        return user;
     }
 
     @CrossOrigin
@@ -31,7 +38,11 @@ public class UserController {
                               @RequestParam(required = false) String subject,
                               @RequestParam(required = false) String gender) {
         User user = userService.getUser(username);
-        if (user == null) throw new MyException(Code.USER_NOT_EXIST);
+        if (user == null) {
+            user = new User();
+            user.setUsername(username);
+            userService.register(user);
+        }
         if (picture != null) user.setPicture(picture);
         if (age != null) user.setAge(age);
         if (subject != null) userService.setSubject(user, subject);

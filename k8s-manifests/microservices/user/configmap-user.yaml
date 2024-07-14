@@ -2,15 +2,15 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: user-config
-  namespace: microservices
+  
 data:
   application.properties: |
     spring.application.name=Profile
     server.port=8445
     spring.datasource.driver-class-name=org.postgresql.Driver
-    spring.datasource.username=${PGSQL_USER}
-    spring.datasource.password=${PGSQL_PASSWORD}
-    spring.datasource.url=jdbc:postgresql://db-user-service:5432/cloud
+    spring.datasource.username=${DB_USER}
+    spring.datasource.password=${DB_PASSWORD}
+    spring.datasource.url=jdbc:postgresql://user-db-service:5432/cloud
     spring.jpa.hibernate.ddl-auto=update
     spring.jpa.show-sql=false
     server.servlet.session.timeout=30m

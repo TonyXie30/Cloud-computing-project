@@ -2,16 +2,151 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: main-config
-  namespace: microservices
 data:
-  application.properties: |
-    spring.application.name=EventViewer
-    server.port=8444
-    spring.datasource.driver-class-name=org.postgresql.Driver
-    spring.datasource.username=${PGSQL_USER}
-    spring.datasource.password=${PGSQL_PASSWORD}
-    spring.datasource.url=jdbc:postgresql://db-main-service:5432/cloud
-    spring.jpa.hibernate.ddl-auto=update
-    spring.jpa.show-sql=false
-    server.servlet.session.timeout=30m
-
+  application.yaml: |
+    spring:
+      application:
+        name: EventViewer
+      datasource:
+        driver-class-name: org.postgresql.Driver
+        username: ${DB_USER}
+        password: ${DB_PASSWORD}
+        url: jdbc:postgresql://main-db-service:5432/cloud
+      jpa:
+        hibernate:
+          ddl-auto: update
+        show-sql: false
+    
+    server:
+      port: 8444
+      servlet:
+        session:
+          timeout: 30m
+    
+    sql:
+      place: |
+        INSERT INTO place (max_limit,name)
+        values
+            (2147483647,'松禾体育场'),
+            (2147483647,'润杨体育馆'),
+            (200,'南科大中心'),
+            (200,'第一教学楼会议厅'),
+            (50,'第三教学楼'),
+            (30,'星巴克学习工坊'),
+            (200,'音乐厅'),
+            (2147483647,'湖畔'),
+            (100,'商学院会议厅'),
+            (2147483647,'大榕树广场'),
+            (2147483647,'理学院旁'),
+            (2147483647,'工学院旁')
+        ON conflict(name)
+            DO NOTHING;
+      event: |
+        INSERT INTO event (id, description, start_time, end_time, limits, name, picture, place_id)
+        values (1, '"现代科技与家国情怀"特色思政课第五期第六讲：谭斌教授讲述与南科大的故事',
+                '2024-09-16 14:30:00',
+                '2024-09-16 16:30:00',
+                50, '"现代科技与家国情怀"特色思政课',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/05/171715927203644259.png', 4),
+               (2,
+                '2024年5月8日是第77个世界红十字日，我校团委、红十字会、附属医院建设办公室在大榕树广场联合举办"南科微光·博爱五月"世界红十字日主题嘉年华活动，吸引近千名师生参与活动。',
+                '2024-05-08 14:30:00',
+                '2024-05-10 16:30:00',
+                2147483647, '"南科微光·博爱五月"世界红十字日主题嘉年华活动',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/05/091715241507752987.jpg', 10),
+               (3, '4月29日7时30分，工学院在工学院大楼举办2024年"五四青春跑"活动。',
+                '2024-04-29 07:30:00',
+                '2024-04-29 09:30:00',
+                2147483647,
+                '"五四青春跑"',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/04/301714444384675521.png', 12),
+               (4,
+                '应南方科技大学统计与数据科学系主任邵启满讲席教授及副系主任荆炳义的邀请，美国工程院院士、国际知名统计学家吴建福（C.F. Jeff Wu）做客第357期南科大讲堂，面向南科大师生做题为Statisticians at Work: Inspiration, Aspiration, Ambition的学术报告，围绕"灵感，抱负，雄心"分享统计学者的工作及风范。',
+                '2024-09-12 14:30:00',
+                '2024-09-12 16:30:00',
+                200,
+                '南科大讲堂统计学家吴建福',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/05/161715851550211234.png', 4),
+               (5,
+                '4月13日，我校举办2024年校园开放日。开放日活动在主会场和分会场同时开展，内容包括南科大创新发展报告、"菲尔兹奖"得主分享、校长院长对谈、书院制导师制培养介绍、优秀毕业生分享、招生政策解读、院士科普讲座、各院系书院现场展示、实验室和校园设施参观、艺术展演、联合医学院招生宣讲等，带领来访者一睹这所新型研究型大学的独特风采。',
+                '2024-04-23 09:30:00',
+                '2024-04-23 19:30:00',
+                2147483647,
+                '南科大校园开放日',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/04/141713028704748937.jpg', 1),
+               (6, '南方科技大学计算机系举办的"人工智能与未来技术"研讨会，将邀请多位业内专家分享最新研究成果和应用案例。',
+                '2024-10-01 09:00:00',
+                '2024-10-01 12:00:00',
+                150,
+                '"人工智能与未来技术"研讨会',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/03/261711440796551521.png',
+                2),
+               (7,
+                '交响乐《新时代交响序曲》作品包含《庆典序曲》《启航》《丰碑》《山河情》《奋进》《铸梦赞》《征途与辉煌》7首乐曲，用交响乐语言深情讲述了具有新时代特点的中国故事，用音符描绘出新时代新征程的恢宏气象。',
+                '2024-01-10 19:00:00',
+                '2024-01-10 20:00:00',
+                200,
+                '2024年新年音乐会',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/01/111704968809336966.jpg',
+                7),
+               (8, '为庆祝国际数学日，南科大数学系将在3月14日举办系列讲座和数学竞赛，旨在激发学生的数学兴趣和创新思维。',
+                '2024-03-14 09:00:00',
+                '2024-03-14 17:00:00',
+                2147483647,
+                '国际数学日活动',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/03/291711701325127703.png',
+                8),
+               (9,
+                '南科大人文学院举办的"文艺复兴与现代社会"系列讲座，将邀请著名历史学家李教授讲解文艺复兴时期的重大事件及其对现代社会的影响。',
+                '2024-08-20 14:30:00',
+                '2024-08-20 16:30:00',
+                100,
+                '"文艺复兴与现代社会"系列讲座',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/03/191710830580755748.jpeg',
+                3),
+               (10, '2024年南科大春季运动会将于7月1日在学校体育场举行，活动包括田径赛、趣味运动会等，欢迎全校师生踊跃参与。',
+                '2024-07-01 08:00:00',
+                '2024-07-01 18:00:00',
+                2147483647,
+                '南科大春季运动会',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/04/011711955299826299.jpg',
+                1),
+               (11, '南方科技大学将举办2024年度科研成果展，展示学校在各个科研领域取得的最新成果和突破，促进学术交流与合作。',
+                '2025-01-15 10:00:00',
+                '2025-01-15 17:00:00',
+                2147483647,
+                '2024年度科研成果展',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/04/151713172049886125.jpg',
+                10),
+               (12,
+                '南科大环境科学与工程系举办的"气候变化与环境保护"讲座，将邀请环保专家王教授探讨全球气候变化的成因及应对措施。',
+                '2024-12-12 14:00:00',
+                '2024-12-12 16:00:00',
+                80,
+                '"气候变化与环境保护"讲座',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/04/091712671528539588.png',
+                9),
+               (13, '南科大艺术学院将举办"现代艺术与科技"展览，展示学生在现代艺术与科技结合方面的创新作品，欢迎广大师生参观。',
+                '2025-02-01 09:00:00',
+                '2025-02-01 17:00:00',
+                2147483647,
+                '"现代艺术与科技"展览',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/04/011711939644709041.png',
+                11),
+               (14,
+                '南方科技大学生物系将举办"前沿生物技术"研讨会，邀请多位生物技术领域的专家学者分享他们的研究成果和未来发展方向。',
+                '2024-09-05 09:00:00',
+                '2024-09-05 12:00:00',
+                120,
+                '"前沿生物技术"研讨会',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/03/191710830629708255.jpeg',
+                3),
+               (15,
+                '南科大校友会将于2025年02月25日举办校友返校日活动，届时将有丰富的校友联谊活动和校园参观，欢迎各届校友回校参加。',
+                '2025-02-25 10:00:00',
+                '2025-02-25 18:00:00',
+                2147483647,
+                '2024年校友返校日',
+                'https://newshub.sustech.edu.cn/uploads/full/2024/04/171713334716764243.jpg',
+                1) ON conflict(id)
+                DO NOTHING;        

@@ -68,5 +68,9 @@ public class UserService {
         }
         userRepository.leaveEvent(user.getId(), eventId);
     }
+
+    public void register(User user) {
+        userRepository.save(user);
+    }
     
 }
