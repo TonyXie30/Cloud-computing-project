@@ -130,7 +130,7 @@ export const request = createFlatRequest<App.Service.Response, InstanceState>(
 export const demoRequest = createRequest<App.Service.DemoResponse>(
   {
     baseURL: otherBaseURL.demo
-    // 'http://'auth-service:8443'/api/login'
+    // 'http://'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443'/api/login'
   },
   {
     async onRequest(config) {

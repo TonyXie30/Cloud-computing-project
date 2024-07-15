@@ -41,7 +41,7 @@ const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
 
 const globalVariable = inject('globalVariable');
 async function handleSubmit() {
-  const apiUrl = 'http://'+ 'auth-service:8443' + '/api/verify/login';
+  const apiUrl = 'http://'+ 'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443' + '/api/verify/login';
   const logindata = {
     username: model.userName,
     password: model.password

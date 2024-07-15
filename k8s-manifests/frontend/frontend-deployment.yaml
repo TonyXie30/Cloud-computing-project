@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: frontend
@@ -14,12 +14,20 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: tonyxie2017/unity-frontend
+        image: tonyxie2017/unity-frontend:latest
+        imagePullPolicy: Always
         ports:
-        - containerPort: 8080
-        env:
-        - name: VUE_APP_API_URL
-          valueFrom:
-            configMapKeyRef:
-              name: frontend-config
-              key: VUE_APP_API_URL
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: frontend
