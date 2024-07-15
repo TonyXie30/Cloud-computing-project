@@ -76,7 +76,7 @@ function searchEvents() {
 }
 
 onMounted(()=>{
-  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/showAllEvents';
+  const apiUrl = 'http://'+ 'auth-service:8443' + '/api/main/showAllEvents';
   const token = window.localStorage.getItem('jwt');
   axios
     .post(apiUrl, {}, {
@@ -114,7 +114,7 @@ function openModal(src: string, des: string, id: number) {
 }
 
 function bookEvent(id: number) {
-  const apiUrl = 'http://' + 'localhost:8443'+ '/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://' + 'auth-service:8443'+ '/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
   const token = window.localStorage.getItem('jwt');
   axios
     .post(apiUrl, {}, {

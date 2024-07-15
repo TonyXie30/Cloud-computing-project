@@ -30,6 +30,21 @@ data:
               uri: http://verify-service:8446
               predicates:
                 - Path=/api/verify/**
+          globalcors:
+            cors-configurations:
+                '[/**]':
+                    allowedOrigins: "*"
+                    allowedMethods:
+                    - GET
+                    - POST
+                    - PUT
+                    - DELETE
+                    - PATCH
+                    allowedHeaders:
+                    - "*"
+                    maxAge: 3600
+          default-filters:
+            - DedupeResponseHeader=Vary Access-Control-Allow-Origin , RETAIN_FIRST
       application:
         name: Auth
       main:

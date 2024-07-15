@@ -45,7 +45,7 @@ const handleSubmit = () => {
     value.value = '';
   }, 1000);
   console.log(props.eventId);
-  // const apiUrl = 'http://'localhost:8443'/api/addComment?eventId='+props.eventId+'&comment='+value.value+'&username='+storage.get('user')?.name;
+  // const apiUrl = 'http://'auth-service:8443'/api/addComment?eventId='+props.eventId+'&comment='+value.value+'&username='+storage.get('user')?.name;
   // axios
   //   .post(apiUrl)
   //   .then(response => {
@@ -63,7 +63,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   console.log(props.eventId);
-  // const apiUrl = 'http://'localhost:8443'/api/showComment?eventId='+props.eventId;
+  // const apiUrl = 'http://'auth-service:8443'/api/showComment?eventId='+props.eventId;
   // axios
   //   .post(apiUrl)
   //   .then(response => {

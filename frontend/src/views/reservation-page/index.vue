@@ -35,7 +35,7 @@ const eventsBrief = ref<EventBrief[]>([]);
 const events = ref<Event[]>([]);
 
 const fetchEvents = async () => {
-  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/getSelfEvents?username=' + storage.get('user')?.name
+  const apiUrl = 'http://'+ 'auth-service:8443' + '/api/main/getSelfEvents?username=' + storage.get('user')?.name
   const token = window.localStorage.getItem('jwt')
   try {
     const response = await axios.post(apiUrl,{}, {
@@ -68,7 +68,7 @@ onMounted(() => {
 })
 
 function bookCancel(id: number) {
-  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/leaveEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://'+ 'auth-service:8443' + '/api/main/leaveEvent?username='+storage.get('user')?.name+'&eventId='+id;
   const token = window.localStorage.getItem('jwt');
   axios
     .post(apiUrl, {}, {

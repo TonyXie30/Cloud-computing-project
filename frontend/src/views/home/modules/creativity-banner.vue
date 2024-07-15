@@ -37,7 +37,7 @@ defineOptions({
 });
 
 onMounted(()=>{
-  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/getRecommendEvents';
+  const apiUrl = 'http://'+ 'auth-service:8443' + '/api/main/getRecommendEvents';
   const token = window.localStorage.getItem('jwt');
   axios
     .post(apiUrl, {}, {
@@ -72,7 +72,7 @@ function openModal(src: string) {
 }
 
 function bookEvent(id: number) {
-  const apiUrl = 'http://'+ 'localhost:8443' + '/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://'+ 'auth-service:8443' + '/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
   const token = window.localStorage.getItem('jwt');
   axios
     .post(apiUrl, {}, {

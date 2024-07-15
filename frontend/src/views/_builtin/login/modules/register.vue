@@ -40,7 +40,7 @@ const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
 });
 
 async function handleSubmit() {
-  const apiUrl = 'http://' + 'localhost:8443' +'/api/verify/register';
+  const apiUrl = 'http://' + 'auth-service:8443' +'/api/verify/register';
   const logindata = {
     username: model.phone,
     password: model.password

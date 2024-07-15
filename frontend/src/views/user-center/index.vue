@@ -106,7 +106,7 @@ const toggleEditMode = () => {
     let gender = UserData.value.gender.gender || 'male';
     let subject = UserData.value.subject.name;
     let age = UserData.value.age || 0;
-    const apiUrl = 'http://'+ 'localhost:8443' + '/api/profile/updateProfile?username='+storage.get('user')?.name +'&age='+age+'&subject='+ subject +'&gender='+gender
+    const apiUrl = 'http://'+ 'auth-service:8443' + '/api/profile/updateProfile?username='+storage.get('user')?.name +'&age='+age+'&subject='+ subject +'&gender='+gender
       +'&picture='+UserData.value.picture;
     console.log(apiUrl)
     const token = window.localStorage.getItem('jwt');
@@ -132,7 +132,7 @@ const toggleEditMode = () => {
 };
 
 onMounted(() => {
-  const apiUrl = 'http://'+ 'localhost:8443' + '/api/profile/getProfile?username='+storage.get('user')?.name;
+  const apiUrl = 'http://'+ 'auth-service:8443' + '/api/profile/getProfile?username='+storage.get('user')?.name;
   console.log(apiUrl);
   const token = window.localStorage.getItem('jwt');
   axios
