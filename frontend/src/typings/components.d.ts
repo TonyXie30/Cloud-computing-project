@@ -153,6 +153,8 @@ declare module 'vue' {
     NetworkLagIcon: typeof import('./../components/TUIRoom/components/common/icons/NetworkLagIcon.vue')['default']
     NetworkStabilityIcon: typeof import('./../components/TUIRoom/components/common/icons/NetworkStabilityIcon.vue')['default']
     NextIcon: typeof import('./../components/TUIRoom/components/common/icons/NextIcon.vue')['default']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
     NGi: typeof import('naive-ui')['NGi']
     NGrid: typeof import('naive-ui')['NGrid']
     NInput: typeof import('naive-ui')['NInput']

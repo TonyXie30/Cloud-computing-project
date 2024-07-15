@@ -15,11 +15,19 @@ spec:
       containers:
       - name: frontend
         image: tonyxie2017/unity-frontend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
-        env:
-        - name: VUE_APP_API_URL
-          valueFrom:
-            configMapKeyRef:
-              name: frontend-config
-              key: VUE_APP_API_URL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: frontend

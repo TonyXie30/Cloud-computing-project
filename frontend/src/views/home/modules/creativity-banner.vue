@@ -37,9 +37,14 @@ defineOptions({
 });
 
 onMounted(()=>{
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/getRecommendEvents';
+  const apiUrl = 'http://'+ 'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443' + '/api/main/getRecommendEvents';
+  const token = window.localStorage.getItem('jwt');
   axios
-    .post(apiUrl)
+    .post(apiUrl, {}, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(response => {
       console.log(response.data.data.length);
       if(response.data.code===200){
@@ -67,9 +72,14 @@ function openModal(src: string) {
 }
 
 function bookEvent(id: number) {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const apiUrl = 'http://'+ 'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443' + '/api/main/joinEvent?username='+storage.get('user')?.name+'&eventId='+id;
+  const token = window.localStorage.getItem('jwt');
   axios
-    .post(apiUrl)
+    .post(apiUrl, {}, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(response => {
       console.log(response.data);
       if(response.data.code===200){

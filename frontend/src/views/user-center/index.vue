@@ -106,11 +106,16 @@ const toggleEditMode = () => {
     let gender = UserData.value.gender.gender || 'male';
     let subject = UserData.value.subject.name;
     let age = UserData.value.age || 0;
-    const apiUrl = 'process.env.VUE_APP_API_URL/api/profile/updateProfile?username='+storage.get('user')?.name +'&age='+age+'&subject='+ subject +'&gender='+gender
+    const apiUrl = 'http://'+ 'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443' + '/api/profile/updateProfile?username='+storage.get('user')?.name +'&age='+age+'&subject='+ subject +'&gender='+gender
       +'&picture='+UserData.value.picture;
     console.log(apiUrl)
+    const token = window.localStorage.getItem('jwt');
     axios
-      .post(apiUrl)
+      .post(apiUrl, {}, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      })
       .then(response => {
         if(response.data.code===200){
           console.log("1")
@@ -127,10 +132,15 @@ const toggleEditMode = () => {
 };
 
 onMounted(() => {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/profile/getProfile?username='+storage.get('user')?.name;
+  const apiUrl = 'http://'+ 'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443' + '/api/profile/getProfile?username='+storage.get('user')?.name;
   console.log(apiUrl);
+  const token = window.localStorage.getItem('jwt');
   axios
-    .post(apiUrl)
+    .post(apiUrl, {}, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(response => {
       if(response.data.code===200){
         const data = response.data.data;

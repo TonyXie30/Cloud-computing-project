@@ -41,7 +41,7 @@ const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
 
 const globalVariable = inject('globalVariable');
 async function handleSubmit() {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/verify/login';
+  const apiUrl = 'http://'+ 'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443' + '/api/verify/login';
   const logindata = {
     username: model.userName,
     password: model.password
@@ -54,8 +54,9 @@ async function handleSubmit() {
       if(response.data.code===200){
         validate();
 
-        const token = response.data.jwt;
-        const user = {name: model.userName, token: token};
+        const jwt = response.data.data.jwt;
+        window.localStorage.setItem('jwt', jwt);
+        const user = {name: model.userName};
 
         updateValue('???');
         console.log(storage.get('user')?.name);

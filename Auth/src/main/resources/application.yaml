@@ -27,6 +27,21 @@ spring:
           uri: http://localhost:8446
           predicates:
             - Path=/api/verify/**
+      globalcors:
+        cors-configurations:
+            '[/**]':
+                allowedOrigins: "*"
+                allowedMethods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+                - PATCH
+                allowedHeaders:
+                - "*"
+                maxAge: 3600
+      default-filters:
+        - DedupeResponseHeader=Vary Access-Control-Allow-Origin , RETAIN_FIRST
   application:
     name: Auth
   main:
@@ -37,3 +52,7 @@ server:
 jwt:
   secret: p4M/KQlpQ1gP1HcBfLl9t0Sjx5Ff/oeWrtfsdhWld8qS4gn97A0Hg3bYpUNSsdHQD0qH2rDP7AEfPQ2KpGxyXA==
   expiration: 604800
+
+logging:
+    level:
+      root: debug

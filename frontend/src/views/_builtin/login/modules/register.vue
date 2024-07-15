@@ -40,7 +40,7 @@ const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
 });
 
 async function handleSubmit() {
-  const apiUrl = 'process.env.VUE_APP_API_URL/api/verify/register';
+  const apiUrl = 'http://' + 'a2a127a20ddfa4b7e9442a040151db72-615736446.us-east-1.elb.amazonaws.com:8443' +'/api/verify/register';
   const logindata = {
     username: model.phone,
     password: model.password
