@@ -12,6 +12,10 @@ spec:
       labels:
         app: user
     spec:
+      initContainers:
+      - name: init-user-db
+        image: busybox
+        command: ['sh', '-c', 'until nslookup user-db-service; do echo waiting for user-db to run; sleep 2; done;']
       containers:
       - name: user
         image: tonyxie2017/unity-user:latest

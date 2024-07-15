@@ -12,6 +12,10 @@ spec:
       labels:
         app: main
     spec:
+      initContainers:
+      - name: init-main-db
+        image: busybox
+        command: ['sh', '-c', 'until nslookup main-db-service; do echo waiting for main-db to run; sleep 2; done;']
       containers:
       - name: main
         image: tonyxie2017/unity-main:latest
