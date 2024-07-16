@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: verify-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: verify
@@ -15,7 +15,7 @@ spec:
       initContainers:
       - name: init-verify-db
         image: busybox
-        command: ['sh', '-c', 'while ! nslookup verify-db-service.default.svc.cluster.local; do echo waiting for main-db to run; sleep 2; done;']
+        command: ['sh', '-c', 'while ! nslookup verify-db-service.default.svc.cluster.local; do echo waiting for verify-db to run; sleep 2; done;']
       containers:
       - name: verify
         image: tonyxie2017/unity-verify:latest
