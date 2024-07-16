@@ -26,6 +26,7 @@ spec:
         app: main-db
     spec:
       containers:
+      # Main containter
       - name: main-db
         image: postgres:13
         ports:

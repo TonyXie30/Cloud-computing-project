@@ -27,7 +27,7 @@ spec:
         env:
         - name: SPRING_CONFIG_LOCATION
           value: "/config/application.yaml"
-        - name: POSTGRES_USER
+        - name: POSTGRES_USERNAME
           valueFrom:
             secretKeyRef:
               name: db-secret
