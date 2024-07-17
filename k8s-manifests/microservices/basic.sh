@@ -7,7 +7,6 @@ kubectl apply -f ./user/configmap-user.yaml
 kubectl apply -f ./verify/configmap-verify.yaml
 
 # Storage
-kubectl apply -f ./Storage/ebs-sc.yaml
 kubectl apply -f ./main/statefulset-main.yaml
 kubectl apply -f ./user/statefulset-user.yaml
 kubectl apply -f ./verify/statefulset-verify.yaml
