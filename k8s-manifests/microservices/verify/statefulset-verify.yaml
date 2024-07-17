@@ -48,7 +48,7 @@ spec:
         image: tonyxie2017/pgsql-listener:latest
         env:
           - name: PRIMARY_DB_HOST
-            value: "main-db-service"
+            value: verify-db-service
           - name: PRIMARY_DB_PORT
             value: "5432"
           - name: PRIMARY_DB_USER

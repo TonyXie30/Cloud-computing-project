@@ -20,8 +20,8 @@ data:
                 - Path=/api/main/**
               filters:
                 - name: JwtAuth
-            - id: profile_service
-              uri: http://profile-service:8445
+            - id: user_service
+              uri: http://user-service:8445
               predicates:
                 - Path=/api/profile/**
               filters:

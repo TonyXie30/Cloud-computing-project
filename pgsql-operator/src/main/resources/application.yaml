@@ -1,5 +1,0 @@
-spring:
-  application:
-    name: pgsql-operator
-server:
-  port: 8080
