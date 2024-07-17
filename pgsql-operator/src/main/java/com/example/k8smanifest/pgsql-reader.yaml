@@ -1,0 +1,12 @@
+apiVersion: example.com/v1
+kind: PgsqlReader
+metadata:
+  name: pgsql-reader-instance
+spec:
+  secondary:
+    - url: "jdbc:postgresql://user-db-service:5432/cloud"
+      username: "$(POSTGRES_USER)"
+      password: "$(POSTGRES_PASSWORD)"
+    - url: "jdbc:postgresql://main-db-service:5432/cloud"
+      username: "$(POSTGRES_USER)"
+      password: "$(POSTGRES_PASSWORD)"

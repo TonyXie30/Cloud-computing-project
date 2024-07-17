@@ -8,13 +8,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Configuration
 public class OperatorConfig {
 
     @Bean
-    public PgsqlReaderReconciler pgsqlReaderReconciler(JdbcTemplate jdbcTemplate) {
-        return new PgsqlReaderReconciler(jdbcTemplate);
+    public ConcurrentLinkedQueue<Map<String, Object>> changeQueue() {
+        return new ConcurrentLinkedQueue<>();
+    }
+
+    @Bean
+    public PgsqlReaderReconciler pgsqlReaderReconciler(ConcurrentLinkedQueue<Map<String, Object>> changeQueue) {
+        return new PgsqlReaderReconciler(changeQueue);
     }
 
     @Bean(initMethod = "start", destroyMethod = "stop")

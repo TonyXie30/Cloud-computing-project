@@ -10,6 +10,13 @@ PRIMARY_DB_PASSWORD = os.getenv("PRIMARY_DB_PASSWORD", "123456")
 PRIMARY_DB_NAME = os.getenv("PRIMARY_DB_NAME", "cloud")
 OPERATOR_URL = os.getenv("OPERATOR_URL", "http://localhost:8080/sync")
 
+def execute_sql_script(file_path, connection):
+    with open(file_path, 'r') as file:
+        sql_script = file.read()
+    cur = connection.cursor()
+    cur.execute(sql_script)
+    connection.commit()
+
 def listen_for_changes():
     while True:
         try:
@@ -21,6 +28,10 @@ def listen_for_changes():
             dbname=PRIMARY_DB_NAME
             )
             conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+
+            # Execute the trigger.sql script
+            execute_sql_script("trigger.sql", conn)
+
             cur = conn.cursor()
             cur.execute("LISTEN user_table_update;")
             print("Waiting for notifications on channel 'user_table_update'")

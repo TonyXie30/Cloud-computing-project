@@ -8,16 +8,7 @@ import java.util.List;
 @Configuration
 @ConfigurationProperties(prefix = "database")
 public class PgsqlReaderSpec {
-    private DBProperties primary;
     private List<DBProperties> secondary;
-
-    public DBProperties getPrimary() {
-        return primary;
-    }
-
-    public void setPrimary(DBProperties primary) {
-        this.primary = primary;
-    }
 
     public List<DBProperties> getSecondary() {
         return secondary;

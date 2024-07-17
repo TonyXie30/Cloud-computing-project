@@ -44,6 +44,27 @@ spec:
               key: POSTGRES_PASSWORD
         - name: POSTGRES_DB
           value: cloud
+      - name: pgsql-listener
+        image: tonyxie2017/pgsql-listener:latest
+        env:
+          - name: PRIMARY_DB_HOST
+            value: "main-db-service"
+          - name: PRIMARY_DB_PORT
+            value: "5432"
+          - name: PRIMARY_DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: POSTGRES_USERNAME
+          - name: PRIMARY_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: POSTGRES_PASSWORD
+          - name: PRIMARY_DB_NAME
+            value: "cloud"
+          - name: OPERATOR_URL
+            value: "http://pgsqlreader-operator-service:8080/sync"
         volumeMounts:
         - name: verify-db-storage
           mountPath: /data

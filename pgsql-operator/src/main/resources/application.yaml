@@ -1,18 +1,5 @@
 spring:
   application:
     name: pgsql-operator
-database:
-  table: "user"
-  primary:
-    url: jdbc:postgresql://verify-db-service:5432/cloud
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
-  secondary:
-      - url: jdbc:postgresql://main-db-service:5432/cloud
-        username: ${POSTGRES_USER}
-        password: ${POSTGRES_PASSWORD}
-      - url: jdbc:postgresql://user-db-service:5432/cloud
-        username: ${POSTGRES_USER}
-        password: ${POSTGRES_PASSWORD}
 server:
   port: 8080
