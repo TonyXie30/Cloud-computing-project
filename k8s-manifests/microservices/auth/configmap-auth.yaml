@@ -49,8 +49,20 @@ data:
         name: Auth
       main:
         web-application-type: reactive
+        zipkin:
+          base-url: http://zipkin:9411
+        sleuth:
+          sampler:
+            probability: 1.0  
     server:
       port: 8443
     jwt:
       secret: ${JWT_SECRET}
       expiration: 604800000
+    management:
+      zipkin:
+        tracing:
+          endpoint: http://zipkin:9411/api/v2/spans
+      tracing:
+        sampling:
+          probability: 1.0

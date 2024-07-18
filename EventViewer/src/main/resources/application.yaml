@@ -11,11 +11,27 @@ spring:
       ddl-auto: update
     show-sql: false
 
+
 server:
   port: 8444
   servlet:
     session:
       timeout: 30m
+
+management:
+  zipkin:
+    tracing:
+      endpoint: localhost:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: 'httptrace'
+
+
 
 sql:
   place: |

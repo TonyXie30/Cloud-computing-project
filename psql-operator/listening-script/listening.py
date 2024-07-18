@@ -3,6 +3,7 @@ import requests
 import json
 import os
 import logging
+import time
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -14,6 +15,8 @@ PRIMARY_DB_USER = os.getenv("PRIMARY_DB_USER", "postgres")
 PRIMARY_DB_PASSWORD = os.getenv("PRIMARY_DB_PASSWORD", "123456")
 PRIMARY_DB_NAME = os.getenv("PRIMARY_DB_NAME", "cloud")
 OPERATOR_URL = os.getenv("OPERATOR_URL", "http://localhost:8080/sync")
+
+attempt_delay = 60
 
 def execute_sql_script(file_path, connection):
     with open(file_path, 'r') as file:
@@ -51,6 +54,9 @@ def listen_for_changes():
                 logging.info(f"Forwarded to Operator, response status: {response.status_code}")
     except Exception as e:
         logging.error(e)
+        logging.info(f"Waiting for {attempt_delay} seconds before retrying...")
+        time.sleep(attempt_delay)
+        listen_for_changes()
 
 if __name__ == "__main__":
     listen_for_changes()
