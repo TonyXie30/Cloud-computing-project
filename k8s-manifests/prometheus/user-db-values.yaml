@@ -1,0 +1,85 @@
+serviceMonitor:
+  # When set true then use a ServiceMonitor to configure scraping
+  enabled: true
+  # Set the namespace the ServiceMonitor should be deployed
+  # namespace: default
+  # Set how frequently Prometheus should scrape
+  interval: 60s
+  # Set path to cloudwatch-exporter telemtery-path
+  # telemetryPath: /metrics
+  # Set labels for the ServiceMonitor, use this to define your scrape label for Prometheus Operator
+  labels:
+    release: prometheus
+  # Set timeout for scrape
+  # timeout: 10s
+  # Set of labels to transfer from the Kubernetes Service onto the target
+  # targetLabels: []
+  # MetricRelabelConfigs to apply to samples before ingestion
+  # metricRelabelings: []
+  # Set relabel_configs as per https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+  # relabelings: []
+
+config:
+  ## The datasource properties on config are passed through helm tpl function.
+  ## ref: https://helm.sh/docs/developing_charts/#using-the-tpl-function
+  datasource:
+    # Specify one of both datasource or datasourceSecret
+    host: 'user-db-service'
+    user: postgres
+    userSecret: {
+      name: db-secret,
+      key: POSTGRES_USERNAME
+    }
+    # Secret name
+    #  name:
+    # User key inside secret
+    #  key:
+    # Only one of password, passwordFile, passwordSecret and pgpassfile can be specified
+    password:
+    # Specify passwordFile if DB password is stored in a file.
+    # For example, to use with vault-injector from Hashicorp
+    passwordFile: ''
+    # Specify passwordSecret if DB password is stored in secret.
+    passwordSecret: {
+      name: db-secret,
+      key: POSTGRES_PASSWORD
+    }
+    # Secret name
+    #  name:
+    # Password key inside secret
+    #  key:
+    pgpassfile: ''
+    # If pgpassfile is set, it is used to initialize the PGPASSFILE environment variable.
+    # See https://www.postgresql.org/docs/14/libpq-pgpass.html for more info.
+    port: "5432"
+    database: ''
+    sslmode: disable
+    extraParams: ''
+  datasourceSecret: {}
+    # Specifies if datasource should be sourced from secret value in format: postgresql://login:password@hostname:port/dbname?sslmode=disable
+    # Multiple Postgres databases can be configured by comma separated postgres connection strings
+    # Secret name
+    #  name:
+    # Connection string key inside secret
+    #  key:
+  disableCollectorDatabase: false
+  disableCollectorBgwriter: false
+  disableDefaultMetrics: false
+  disableSettingsMetrics: false
+
+  # possible values debug, info, warn, error, fatal
+  logLevel: ""
+  # possible values logfmt, json
+  logFormat: ""
+  extraArgs: []
+
+  # postgres_exporter.yml
+  postgresExporter: ""
+    # auth_modules:
+    #   first:
+    #     type: userpass
+    #     userpass:
+    #       username: first
+    #       password: firstpass
+    #     options:
+    #       sslmode: disable
