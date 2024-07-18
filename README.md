@@ -84,6 +84,7 @@ Our major src code are in the directory 'Auth','EventViewer','Profile','Verify' 
 - **Tracing**: Uses Zipkin for troubleshooting latency issues in services.
 
 ### 1.4 File structure
+```
 .
 ├── Architecture Diagram
 │   ├── Microservices.png
@@ -157,7 +158,7 @@ Our major src code are in the directory 'Auth','EventViewer','Profile','Verify' 
     ├── pom.xml
     ├── src
     └── target
-
+```
 
 ## 2. Environment Setup
 
