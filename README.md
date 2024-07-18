@@ -57,7 +57,7 @@ EventEase is a cutting-edge event booking system divided into two main component
 
 - **Zipkin**: Zipkin is used to gather timing data, helping to troubleshoot latency issues in the services by providing detailed tracing information.
 
-### System Architecture
+#### System Architecture Diagrams
 
 #### Overall System Architecture
 ![Overall System Architecture](./Architecture%20Diagram/Overview.png)
