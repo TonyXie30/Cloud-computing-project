@@ -115,9 +115,7 @@ Detailed steps to deploy the application.
     helm repo add grafana https://grafana.github.io/helm-charts
     helm repo update
     helm install prometheus prometheus-community/kube-prometheus-stack
-    cd loki-logging
-    helm install --values loki-values.yaml loki grafana/loki-stack
-    cd ..
+    helm install --values ./loki-logging/loki-values.yaml loki grafana/loki-stack
 
     # Setup grafana loki so that it shares the same grafana dashboard with prometheus
     # By adding datasource collected from loki and import it into grafana
@@ -128,7 +126,7 @@ Detailed steps to deploy the application.
     # Password: prom-operator
     # Then go under connections -> add new connection -> search for loki -> on the top right, press "add data source"
     # Then under the connection field, find the URL box and paste http://loki:3100 as the url 
-    # then scroll down to press "Save & test" and you're done setting up the monitoring and logging service!
+    # then scroll down to press "Save & test" and you're done setting up the monitoring and logging services!
 
     ```
 2. **Step 2**: Deploy the microservices and front-end.
