@@ -69,10 +69,10 @@ EventEase is a cutting-edge event booking system divided into two main component
 ![Monitoring and Logging Setup](./Architecture%20Diagram/Monitoring%20and%20Logging%20Setup.png)
 
 #### Database Synchronization Flow
-![Database Synchronization Flow](link_to_database_synchronization.png)
+![Database Synchronization Flow](./Architecture%20Diagram/Data%20Synchronization%20.png)
 
 #### Tracing Setup
-![Tracing Setup](link_to_tracing_setup.png)
+![Tracing Setup](./Architecture%20Diagram/Tracing.png)
 
 ### 1.3 Key Components
 - **Front-End**: Deployed using a Kubernetes Deployment with a LoadBalancer service for external access.
@@ -96,7 +96,7 @@ Step-by-step guide to setting up the development environment.
     - Follow the cluster setup steps provided by TA Mao Yancan.
     - **Note**: When creating the node groups, set the node instance type from `t3.medium` to `t3.large` to ensure enough pods can be created.
 2. **Step 2**: Install Helm.
-    - Follow the this [guide](https://helm.sh/docs/intro/install/) to install helm on Linux.
+    - Follow this [guide](https://helm.sh/docs/intro/install/) to install helm on Linux.
 
 ## 3. Application Deployment
 
@@ -115,8 +115,21 @@ Detailed steps to deploy the application.
     helm repo add grafana https://grafana.github.io/helm-charts
     helm repo update
     helm install prometheus prometheus-community/kube-prometheus-stack
-    cd k8s-manifests/loki-logging
+    cd loki-logging
     helm install --values loki-values.yaml loki grafana/loki-stack
+    cd ..
+
+    # Setup grafana loki so that it shares the same grafana dashboard with prometheus
+    # By adding datasource collected from loki and import it into grafana
+    kubectl port-forward deployment/prometheus-grafana 3000
+
+    # Now go to localhost:3000 and log in to grafana dashboard with the following credentials
+    # User: admin
+    # Password: prom-operator
+    # Then go under connections -> add new connection -> search for loki -> on the top right, press "add data source"
+    # Then under the connection field, find the URL box and paste http://loki:3100 as the url 
+    # then scroll down to press "Save & test" and you're done setting up the monitoring and logging service!
+
     ```
 2. **Step 2**: Deploy the microservices and front-end.
     ```bash
@@ -145,10 +158,10 @@ Detailed steps to deploy the application.
     kubectl apply -f ./frontend/deployment-frontend.yaml
     ```
 
-2. **Step 3**: Deploy exporter for microservices.
+3. **Step 3**: Deploy exporter for microservices.
     ```bash
-    helm install main-db-exporter prometheus-community/prometheus-postgres-exporter -f ./prometheus/main-db-values.yaml
-    helm install user-db-exporter prometheus-community/prometheus-postgres-exporter -f ./prometheus/user-db-values.yaml
-    helm install verify-db-exporter prometheus-community/prometheus-postgres-exporter -f ./prometheus/verify-db-values.yaml
-    helm install redis-exporter prometheus-community/prometheus-redis-exporter -f ./prometheus/redis-values.yaml
+    helm install main-db-exporter prometheus-community/prometheus-postgres-exporter -f ./prometheus-monitoring/main-db-values.yaml
+    helm install user-db-exporter prometheus-community/prometheus-postgres-exporter -f ./prometheus-monitoring/user-db-values.yaml
+    helm install verify-db-exporter prometheus-community/prometheus-postgres-exporter -f ./prometheus-monitoring/verify-db-values.yaml
+    helm install redis-exporter prometheus-community/prometheus-redis-exporter -f ./prometheus-monitoring/redis-values.yaml
     ```
