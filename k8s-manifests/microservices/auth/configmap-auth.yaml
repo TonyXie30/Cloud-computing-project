@@ -23,7 +23,7 @@ data:
             - id: user_service
               uri: http://user-service:8445
               predicates:
-                - Path=/api/profile/**
+                - Path=/api/user/**
               filters:
                 - name: JwtAuth
             - id: verify_service
