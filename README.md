@@ -83,6 +83,82 @@ Our major src code are in the directory 'Auth','EventViewer','Profile','Verify' 
 - **Custom Operator**: Ensures seamless synchronization of distributed databases for data consistency.
 - **Tracing**: Uses Zipkin for troubleshooting latency issues in services.
 
+### 1.4 File structure
+.
+├── Architecture Diagram
+│   ├── Microservices.png
+│   ├── Monitoring and Logging Setup.png
+│   └── Overview.png
+├── Auth
+│   ├── Dockerfile
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   ├── pom.xml
+│   ├── src
+│   └── target
+├── EventViewer
+│   ├── Dockerfile
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   ├── pom.xml
+│   ├── src
+│   └── target
+├── frontend
+│   ├── build
+│   ├── certificates
+│   ├── CHANGELOG.md
+│   ├── Dockerfile
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── LICENSE
+│   ├── nginx.conf
+│   ├── node_modules
+│   ├── package.json
+│   ├── packages
+│   ├── pnpm-lock.yaml
+│   ├── pnpm-workspace.yaml
+│   ├── public
+│   ├── src
+│   ├── tsconfig.json
+│   ├── uno.config.ts
+│   └── vite.config.ts
+├── init.sql
+├── k8s-manifests
+│   ├── autoDeploy.sh
+│   ├── frontend
+│   ├── loki-logging
+│   ├── microservices
+│   ├── prometheus-monitoring
+│   ├── secrets
+│   ├── storage
+│   └── zipkin
+├── Profile
+│   ├── Dockerfile
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   ├── pom.xml
+│   ├── src
+│   └── target
+├── psql-operator
+│   ├── Dockerfile
+│   ├── HELP.md
+│   ├── listening-script
+│   ├── mvnw
+│   ├── mvnw.cmd
+│   ├── pom.xml
+│   ├── src
+│   └── update.sh
+├── README.md
+├── upload.sh
+└── Verify
+    ├── Dockerfile
+    ├── mvnw
+    ├── mvnw.cmd
+    ├── pom.xml
+    ├── src
+    └── target
+
+
 ## 2. Environment Setup
 
 ### 2.1 Prerequisites
