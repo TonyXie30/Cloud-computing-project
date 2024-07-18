@@ -163,3 +163,16 @@ Detailed steps to deploy the application.
     helm install verify-db-exporter prometheus-community/prometheus-postgres-exporter -f ./prometheus-monitoring/verify-db-values.yaml
     helm install redis-exporter prometheus-community/prometheus-redis-exporter -f ./prometheus-monitoring/redis-values.yaml
     ```
+
+4. **Step 4**: Deploy operator.
+    ```bash
+    kubectl apply -f ../psql-operator/src/main/java/com/example/operator/k8smanifest/clusterRole.yaml     
+    kubectl apply -f ../psql-operator/src/main/java/com/example/operator/k8smanifest/PostgresUserSync.yaml     
+    kubectl apply -f ../psql-operator/src/main/java/com/example/operator/k8smanifest/pgsql-reader.yaml     
+    kubectl apply -f ../psql-operator/src/main/java/com/example/operator/k8smanifest/pgsqlreader-deployment.yaml
+    ```      
+
+4. **Step 5**: Deploy Zipkin.
+    ```bash
+    kubectl apply -f ./zipkin/zipkin-deployment.yaml
+    ```
