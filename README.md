@@ -18,7 +18,9 @@ By utilizing these cutting-edge technologies, EventEase provides a seamless, sca
 
 ### 1.2 System Architecture
 
-EventEase is a cutting-edge event booking system divided into two main components: the front-end and a suite of microservices. The system leverages Kubernetes for scalable and reliable deployment, complemented by robust monitoring and logging solutions using Prometheus, Grafana, and Grafana Loki. A custom operator ensures seamless synchronization of distributed databases, maintaining data consistency across multiple instances.
+EventEase is a cutting-edge event booking system divided into two main components: the front-end and a suite of microservices including Auth, EventViewer, Profile and Verify. The system leverages Kubernetes for scalable and reliable deployment, complemented by robust monitoring and logging solutions using Prometheus, Grafana, and Grafana Loki. A custom operator ensures seamless synchronization of distributed databases, maintaining data consistency across multiple instances.
+
+Our major src code are in the directory 'Auth','EventViewer','Profile','Verify' and 'frontend'.
 
 #### Components
 
