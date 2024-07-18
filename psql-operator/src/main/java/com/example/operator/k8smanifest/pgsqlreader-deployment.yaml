@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgsql-reader-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgsql-reader-operator
+  template:
+    metadata:
+      labels:
+        app: pgsql-reader-operator
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: pgsql-reader-operator
+          image: tonyxie2017/pgsqlreader:latest
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: POSTGRES_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: POSTGRES_PASSWORD
+            - name: TARGET_TABLE
+              value: "user"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgsqlreader-operator
+spec:
+    ports:
+        - port: 8080
+          targetPort: 8080
+          protocol: TCP
+    selector:
+        app: pgsql-reader-operator

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: pgsql-operator
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    hikari:
+      jdbc-url: jdbc:postgresql://verify-db-service:5432/cloud
+    url: jdbc:postgresql://verify-db-service:5432/cloud
+server:
+  port: 8080
+logging:
+  level:
+    root: debug
